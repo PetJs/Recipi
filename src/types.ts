@@ -5,3 +5,11 @@ export interface NavBarProps{
     Twitter: string;
     Insta: string
 }
+
+export interface Random{
+    image: string;
+    summary: string;
+    id: number;
+    readyInMinutes: number;
+    title: string;
+}
