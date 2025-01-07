@@ -12,4 +12,5 @@ export interface Random{
     id: number;
     readyInMinutes: number;
     title: string;
+    diets: string[];
 }
