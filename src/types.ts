@@ -14,3 +14,12 @@ export interface Random{
     title: string;
     diets: string[];
 }
+
+export interface ListCardProps{
+    img: {
+        src: string | any;
+        alt: string;
+        className?: string;
+    };
+    text: string;
+}

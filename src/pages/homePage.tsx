@@ -9,6 +9,7 @@ import randomBg from "../assets/images/foofBg.jpg"
 import img from "../assets/images/image 14.png"
 import Timer from "../assets/images/Timer.svg"
 import Forknife from "../assets/images/ForkKnife.svg"
+import ListCard from "@/components/common/listCard"
 import { Random } from "@/types"
 
 
@@ -33,12 +34,12 @@ function HomePage() {
     }
 
     useEffect(() => {
-        getRandomRecipe()
+        // getRandomRecipe()
     }, [])
 
 
     return(
-        <div>
+        <div className="h-screen">
             <NavBar 
                 Logo={Logo}
                 Facebook={Facebook}
@@ -69,6 +70,62 @@ function HomePage() {
                     <img src={randomBg} alt="" className="w-full h-full rounded-2xl rounded-l" />
                     <img src={random?.image || "https://img.spoonacular.com/recipes/639779-556x370.jpg"} alt="" className="absolute inset-0 md:m-14 md:w-64 md:h-64 h-24 w-24 m-6 rounded-full border border-gray-900 " />
                 </div>
+            </div>
+
+            {/* Recipe Classification    */}
+            <div className="bg-">
+                <h2 className="text-xl font-bold m-2">Components</h2>
+                <div className="grid grid-cols-3 md:flex md:justify-evenly gap-1 m-2 place-items-center">
+                    <ListCard 
+                        img={{
+                            src: img,
+                            alt: "",
+                            className: ""
+                        }} 
+                        text = "Breakfast"
+                    />
+                    <ListCard 
+                        img={{
+                            src: img,
+                            alt: "",
+                            className: ""
+                        }} 
+                        text = "Breakfast"
+                    />
+                    <ListCard 
+                        img={{
+                            src: img,
+                            alt: "",
+                            className: ""
+                        }} 
+                        text = "Breakfast"
+                    />
+                    <ListCard 
+                        img={{
+                            src: img,
+                            alt: "",
+                            className: ""
+                        }} 
+                        text = "Breakfast"
+                    />
+                    <ListCard 
+                        img={{
+                            src: img,
+                            alt: "",
+                            className: ""
+                        }} 
+                        text = "Breakfast"
+                    />
+                    <ListCard 
+                        img={{
+                            src: img,
+                            alt: "",
+                            className: ""
+                        }} 
+                        text = "Breakfast"
+                    />
+                </div>
+                
             </div>
             
         </div>
