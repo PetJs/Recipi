@@ -10,13 +10,22 @@ import img from "../assets/images/image 14.png"
 import Timer from "../assets/images/Timer.svg"
 import Forknife from "../assets/images/ForkKnife.svg"
 import ListCard from "@/components/common/listCard"
+import Vegan from "../assets/images/vegan.png"
+import Breakfast from "../assets/images/breakfast.png"
+import Meat from "../assets/images/meat.png"
+import Dessert from "../assets/images/desert.png"
+import Lunch from "../assets/images/Lunch.png"
+import Chocolate from "../assets/images/chocolate.png"
 import { Random } from "@/types"
+import Card from "@/components/common/card"
+
 
 
 
 
 function HomePage() {
     const [random, setRandom] = useState<Random | null>(null)
+    const [cards, SetCards ] = useState<Random[] >([])
 
     const getRandomRecipe = async () => {
         try{
@@ -33,8 +42,24 @@ function HomePage() {
         
     }
 
+    const getNineRandomRecipe = async () => {
+        try{
+            const response = await axiosInstance.get('recipes/random?number=9')
+            const results = response.data.recipes;
+            SetCards(results)
+            /* console.log(results) */
+        }catch(error: any) {
+            if (error.code === 'ECONNABORTED') {
+              console.error('Request timed out - please try again');
+            }
+            throw error;
+        }
+        
+    }
+
     useEffect(() => {
-        // getRandomRecipe()
+        getRandomRecipe();
+        getNineRandomRecipe();
     }, [])
 
 
@@ -62,7 +87,7 @@ function HomePage() {
                         </div>
                         <div className="flex items-center bg-[#00000099] w-fit rounded-lg md:px-2 px-1 ">
                             <img src={Forknife} alt="" className="w-3 h-3"/>
-                            <p className="md:text-sm text-[12px] whitespace-nowrap">{random?.diets[0] }</p>
+                            <p className="md:text-sm text-[12px] whitespace-nowrap">{random?.dishTypes[0] }</p>
                         </div>
                     </div>                    
                 </div>
@@ -74,58 +99,79 @@ function HomePage() {
 
             {/* Recipe Classification    */}
             <div className="bg-">
-                <h2 className="text-xl font-bold m-2">Components</h2>
+                <h2 className="text-xl font-bold m-2">Categories</h2>
                 <div className="grid grid-cols-3 md:flex md:justify-evenly gap-1 m-2 place-items-center">
                     <ListCard 
                         img={{
-                            src: img,
-                            alt: "",
+                            src: Breakfast,
+                            alt: "breakfast.png",
                             className: ""
                         }} 
                         text = "Breakfast"
                     />
                     <ListCard 
                         img={{
-                            src: img,
-                            alt: "",
+                            src: Vegan,
+                            alt: "vegan.png",
                             className: ""
                         }} 
-                        text = "Breakfast"
+                        text = "Vegan"
                     />
                     <ListCard 
                         img={{
-                            src: img,
-                            alt: "",
+                            src: Meat,
+                            alt: "meat.png",
                             className: ""
                         }} 
-                        text = "Breakfast"
+                        text = "Meat"
                     />
                     <ListCard 
                         img={{
-                            src: img,
-                            alt: "",
+                            src: Dessert,
+                            alt: "dessert.png",
                             className: ""
                         }} 
-                        text = "Breakfast"
+                        text = "Dessert"
                     />
                     <ListCard 
                         img={{
-                            src: img,
-                            alt: "",
+                            src: Lunch,
+                            alt: "lunch.png",
                             className: ""
                         }} 
-                        text = "Breakfast"
+                        text = "Lunch"
                     />
                     <ListCard 
                         img={{
-                            src: img,
+                            src: Chocolate,
                             alt: "",
-                            className: ""
+                            className: "chocolate.png"
                         }} 
-                        text = "Breakfast"
+                        text = "Chocolate"
                     />
                 </div>
                 
+            </div>
+
+            <div>
+                <div className="flex justify-center flex-col items-center">
+                    <h2 className="text-xl">Simple and tasty recipes</h2>
+                    <p className="text-center"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 bg-red-400 md:w-84 md:h-84">
+                    {cards!.map((cards: Random) => (
+                        <Card 
+                            img={{
+                                src: cards?.image, 
+                                alt:"", 
+                                className: ''
+                            }}
+                            title = {cards?.title}
+                            time = {cards?.readyInMinutes}
+                            food = {cards?.dishTypes[0]}
+                        />
+                    ))}
+                </div>
             </div>
             
         </div>

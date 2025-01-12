@@ -12,14 +12,25 @@ export interface Random{
     id: number;
     readyInMinutes: number;
     title: string;
-    diets: string[];
+    dishTypes: string[];
 }
 
 export interface ListCardProps{
+    img: {
+        src: any;
+        alt: string;
+        className?: string;
+    };
+    text: string;
+}
+
+export interface CardProps{
     img: {
         src: string | any;
         alt: string;
         className?: string;
     };
-    text: string;
+    title: string | any;
+    time: number | any;
+    food: string | any;
 }
