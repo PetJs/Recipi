@@ -158,7 +158,7 @@ function HomePage() {
                     <h2 className="text-xl">Simple and tasty recipes</h2>
                     <p className="text-center"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 bg-red-400 md:w-84 md:h-84">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 md:w-84 md:h-84">
                     {cards!.map((cards: Random) => (
                         <Card 
                             img={{
