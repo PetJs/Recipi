@@ -178,16 +178,21 @@ function HomePage() {
             </div>
             
             {/* Learn More */}
-            <div className="flex bg-red-500 justify-center items-center">
-                <div className="w-1/2 ">
+            <div className="flex m-4">
+                <div className="w-1/2 flex flex-col justify-center items-center">
                     <div className="mb-8">
-                        <h2 className="text-2xl font-bold">Everyone can be a chef in their own kitchen</h2>
-                        <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis ullam quo assumenda dolore vero praesentium repellat,</p>
+                        <h2 className="text-xl font-bold">Everyone can be a chef in their own kitchen</h2>
+                        <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
                     </div>
                     <Button text="Learn More"/>
                 </div>
                 <div className="w-1/2 relative">
-                    <img src={Happy} alt="happy.png" />
+                    <img src={Happy} alt="happy.png"  className="w-full h-full"/>
+
+                    <img src={Vegan} alt="vegan.png" className="absolute inset-0 top-6 md:w-12 w-8"/>
+                    <img src={Meat} alt="meat.png" className="absolute bottom-6 left-12 md:w-12 w-8 " />
+                    <img src={Dessert} alt="meat.png" className="absolute md:top-6 top-4 md:right-12 right-0 md:w-12 w-8 " />
+                    
                 </div>
             </div>
             
