@@ -18,6 +18,8 @@ import Lunch from "../assets/images/Lunch.png"
 import Chocolate from "../assets/images/chocolate.png"
 import { Random } from "@/types"
 import Card from "@/components/common/card"
+import Button from "@/components/common/button"
+import Happy from "../assets/images/portrait-happy-male-chef-dressed-uniform 1.png"
 
 
 
@@ -153,6 +155,7 @@ function HomePage() {
                 
             </div>
 
+            {/* Recipi Cards */}
             <div>
                 <div className="flex justify-center flex-col items-center">
                     <h2 className="text-xl">Simple and tasty recipes</h2>
@@ -171,6 +174,20 @@ function HomePage() {
                             food = {cards?.dishTypes[0]}
                         />
                     ))}
+                </div>
+            </div>
+            
+            {/* Learn More */}
+            <div className="flex bg-red-500 justify-center items-center">
+                <div className="w-1/2 ">
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold">Everyone can be a chef in their own kitchen</h2>
+                        <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis ullam quo assumenda dolore vero praesentium repellat,</p>
+                    </div>
+                    <Button text="Learn More"/>
+                </div>
+                <div className="w-1/2 relative">
+                    <img src={Happy} alt="happy.png" />
                 </div>
             </div>
             

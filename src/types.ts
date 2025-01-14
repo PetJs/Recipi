@@ -34,3 +34,7 @@ export interface CardProps{
     time: number | any;
     food: string | any;
 }
+
+export interface ButtonProps{
+    text: string;
+}
