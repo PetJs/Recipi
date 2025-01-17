@@ -5,8 +5,12 @@ import Timer from "../../assets/images/Timer.svg"
 const Card: React.FC<CardProps> = ({img, title, time, food}) =>{
     const {src, alt, className =''} = img;
 
+    if (!img) {
+        return null; // Or return a placeholder/fallback UI
+    }
+
     return (
-        <div className="flex flex-col justify-center  bg-gradient-to-t from-[#E7F9FD] to-[#E7F9FD]/100 text-black items-center p-3 rounded-lg">
+        <div className="flex flex-col justify-center  bg-gradient-to-t from-[#E7F9FD] to-[#E7F9FD]/10 text-black items-center p-3 rounded-lg">
             <img src={typeof src === 'string' ? src : src.src} alt={alt} className={`md:w-full md:h-auto w-32 rounded-lg ${className}`} />
             <div>
                 <p className="text-ellipsis whitespace-pre-wrap w-[14rem] line-clamp-2 text-lg font-bold">{title}</p>

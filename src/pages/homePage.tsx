@@ -20,6 +20,9 @@ import { Random } from "@/types"
 import Card from "@/components/common/card"
 import Button from "@/components/common/button"
 import Happy from "../assets/images/portrait-happy-male-chef-dressed-uniform 1.png"
+import Rocola from "../assets/images/rucola-png.png"
+import PhotoPlate from "../assets/images/Photo-plate.png"
+import Salad from "../assets/images/kisspng-salad-salad-fresh-food-healthylife-vegetables-vegetarian-5d42e3a7cb8543 1.png"
 
 
 
@@ -164,6 +167,7 @@ function HomePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 md:w-84 md:h-84">
                     {cards!.map((cards: Random) => (
                         <Card 
+                            key={cards?.id}
                             img={{
                                 src: cards?.image, 
                                 alt:"", 
@@ -184,15 +188,31 @@ function HomePage() {
                         <h2 className="text-xl font-bold">Everyone can be a chef in their own kitchen</h2>
                         <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
                     </div>
-                    <Button text="Learn More"/>
+                    <Button text="Learn More" className=""/>
                 </div>
-                <div className="w-1/2 relative">
+                <div className="w-1/2 relative bg-gradient-to-t from-[#E7F9FD] to-[#E7F9FD]/10">
                     <img src={Happy} alt="happy.png"  className="w-full h-full"/>
 
                     <img src={Vegan} alt="vegan.png" className="absolute inset-0 top-6 md:w-12 w-8"/>
                     <img src={Meat} alt="meat.png" className="absolute bottom-6 left-12 md:w-12 w-8 " />
-                    <img src={Dessert} alt="meat.png" className="absolute md:top-6 top-4 md:right-12 right-0 md:w-12 w-8 " />
-                    
+                    <img src={Dessert} alt="meat.png" className="absolute md:top-6 top-4 md:right-12 right-0 md:w-12 w-8 " />                    
+                </div>
+            </div>
+                {/* Inbox Section */}
+            <div className="relative bg-[#E7F9FD] rounded-lg flex flex-col justify-center items-center text-center m-4 p-4">
+                <img src={Salad} alt="" className="absolute bottom-0 w-24 md:w-44 left-0" />
+                    <div className="absolute bottom-1 right-8 w-24 md:w-36 flex">
+                        <img src={Rocola} alt="" className="w-8 h-8" />
+                        <img src={PhotoPlate} alt="" />
+                    </div>
+                <h1 className="text-xl font-semibold">Deliciousness to your Inbox</h1>
+                <p className="md:w-[50%] w-[75%] line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius rerum asperiores quos molestiae suscipit culpa na</p>
+
+                <div className="relative p-1 flex items-center justify-center">
+                    <div className="">
+                        <input type="text" name="" id="" className="md:w-[500px] w-full pr-36 p-2 rounded-lg " />
+                        <Button text="Subscribe" className="absolute top-2.5 right-2 "/>
+                    </div>
                 </div>
             </div>
             
