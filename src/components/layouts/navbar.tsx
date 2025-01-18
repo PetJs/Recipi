@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavBarProps } from "@/types";
 import Menu from "../../assets/images/menu-svgrepo-com.svg"
 import cancel from "../../assets/images/cancel-svgrepo-com.svg"
+import { Link } from "react-router-dom";
 
 
 const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
@@ -14,9 +15,15 @@ const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
             
             {/* Desktop Navigation - hidden on mobile */}
             <ul className="hidden md:flex md:gap-4 gap-2 text-lg">
-                <li>Home</li>
-                <li>Recipe</li>
-                <li>Contact</li>
+                <li>
+                    <Link to='/'>Home</Link>
+                </li>
+                <li>
+                    <Link to='/recipe'>Recipe</Link>
+                </li>
+                <li>
+                    <Link to='/contact'> Contact </Link>
+                </li>
             </ul>
 
             {/* Mobile Menu Button - visible only on mobile */}
@@ -32,9 +39,15 @@ const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
             {isOpen && (
                 <div className="absolute top-full right-0 w-full md:hidden bg-red-500 text-center">
                     <ul className="flex flex-col gap-2 p-1 text-lg text-black underline">
-                        <li>Home</li>
-                        <li>Recipe</li>
-                        <li>Contact</li>
+                    <li>
+                        <Link to='/'>Home</Link>
+                    </li>
+                    <li>
+                        <Link to='/recipe'>Recipe</Link>
+                    </li>
+                    <li>
+                        <Link to='/contact'> Contact </Link>
+                    </li>
                     </ul>
                     <div className="flex justify-center gap-4 m-2">
                         <img src={Facebook} alt="Facebook logo" />
