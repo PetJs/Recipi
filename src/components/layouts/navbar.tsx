@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavBarProps } from "@/types";
-import Menu from "../../assets/images/menu-svgrepo-com.svg"
-import cancel from "../../assets/images/cancel-svgrepo-com.svg"
+import Menu from "../../assets/svgs/menu-svgrepo-com.svg"
+import cancel from "../../assets/svgs/cancel-svgrepo-com.svg"
 import { Link } from "react-router-dom";
 
 

@@ -1,6 +1,6 @@
 import { CardProps } from "@/types";
-import Forkknife from "../../assets/images/ForkKnife.svg"
-import Timer from "../../assets/images/Timer.svg"
+import Forkknife from "../../assets/svgs/ForkKnife.svg"
+import Timer from "../../assets/svgs/Timer.svg"
 
 const Card: React.FC<CardProps> = ({img, title, time, food}) =>{
     const {src, alt, className =''} = img;
