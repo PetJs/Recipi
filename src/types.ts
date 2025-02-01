@@ -22,6 +22,7 @@ export interface ListCardProps{
         className?: string;
     };
     text: string;
+    onClick?: () => void;
 }
 
 export interface CardProps{

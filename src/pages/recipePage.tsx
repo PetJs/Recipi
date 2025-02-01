@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axiosInstance from "@/api/axios"
 import Logo from "../assets/svgs/Cooking Template 🟣 by Flowbase.co (Community).svg"
 import Insta from "../assets/svgs/004-instagram.svg"
@@ -19,6 +19,7 @@ import ListCard from "@/components/common/listCard"
 function RecipePage(){
     const [searchData, setSearchData] = useState<Random[] >([])
     const [loading, setLoading] = useState(false);
+    const [recipeData, setRecipeData] = useState<Random[]>([])
 
     const Search = async(e: React.ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value
@@ -43,6 +44,25 @@ function RecipePage(){
             setLoading(false); // Stop loading
         }
     }
+
+    const getMorningMeals = async() => {
+        try{
+            const results = await axiosInstance.get("recipes/random", {
+                params: {
+                    tags: "breakfast",
+                    number: 9
+                }
+            })
+            const response = results.data.recipes
+            setRecipeData(response)
+        }catch(err){
+            console.error("Error fetching breakfast recipes:", err);
+        }
+    }
+
+    useEffect ( ()=> {
+        getMorningMeals();
+    }, [])
 
 
     return(
@@ -96,6 +116,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Breakfast"
+                        onClick={getMorningMeals}
                     />
                     <ListCard 
                         img={{
@@ -104,6 +125,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Vegan"
+                        onClick={getMorningMeals}
                     />
                     <ListCard 
                         img={{
@@ -112,6 +134,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Meat"
+                        onClick={getMorningMeals}
                     />
                     <ListCard 
                         img={{
@@ -120,6 +143,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Dessert"
+                        onClick={getMorningMeals}
                     />
                     <ListCard 
                         img={{
@@ -128,6 +152,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Lunch"
+                        onClick={getMorningMeals}
                     />
                     <ListCard 
                         img={{
@@ -136,6 +161,7 @@ function RecipePage(){
                             className: "chocolate.png"
                         }} 
                         text = "Chocolate"
+                        onClick={getMorningMeals}
                     />
                 </div>
             </div>

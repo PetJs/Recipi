@@ -23,6 +23,7 @@ import Happy from "../assets/images/portrait-happy-male-chef-dressed-uniform 1.p
 import Rocola from "../assets/images/rucola-png.png"
 import PhotoPlate from "../assets/images/Photo-plate.png"
 import Salad from "../assets/images/kisspng-salad-salad-fresh-food-healthylife-vegetables-vegetarian-5d42e3a7cb8543 1.png"
+import { Link } from "react-router-dom"
 
 
 
@@ -106,54 +107,66 @@ function HomePage() {
             <div className="bg-">
                 <h2 className="text-xl font-bold m-2">Categories</h2>
                 <div className="grid grid-cols-3 md:flex md:justify-evenly gap-1 m-2 place-items-center">
-                    <ListCard 
-                        img={{
-                            src: Breakfast,
-                            alt: "breakfast.png",
-                            className: ""
-                        }} 
-                        text = "Breakfast"
-                    />
-                    <ListCard 
-                        img={{
-                            src: Vegan,
-                            alt: "vegan.png",
-                            className: ""
-                        }} 
-                        text = "Vegan"
-                    />
-                    <ListCard 
-                        img={{
-                            src: Meat,
-                            alt: "meat.png",
-                            className: ""
-                        }} 
-                        text = "Meat"
-                    />
-                    <ListCard 
-                        img={{
-                            src: Dessert,
-                            alt: "dessert.png",
-                            className: ""
-                        }} 
-                        text = "Dessert"
-                    />
-                    <ListCard 
-                        img={{
-                            src: Lunch,
-                            alt: "lunch.png",
-                            className: ""
-                        }} 
-                        text = "Lunch"
-                    />
-                    <ListCard 
-                        img={{
-                            src: Chocolate,
-                            alt: "",
-                            className: "chocolate.png"
-                        }} 
-                        text = "Chocolate"
-                    />
+                    <Link to='/recipe'>
+                        <ListCard 
+                            img={{
+                                src: Breakfast,
+                                alt: "breakfast.png",
+                                className: ""
+                            }} 
+                            text = "Breakfast"
+                        />
+                    </Link>
+                    <Link to='/recipe'>
+                        <ListCard 
+                            img={{
+                                src: Vegan,
+                                alt: "vegan.png",
+                                className: ""
+                            }} 
+                            text = "Vegan"
+                        />
+                    </Link>
+                    <Link to='/recipe'>
+                        <ListCard
+                            img={{
+                                src: Meat,
+                                alt: "meat.png",
+                                className: ""
+                            }} 
+                            text = "Meat"
+                        />
+                    </Link>
+                    <Link to='/recipe'>
+                        <ListCard 
+                            img={{
+                                src: Dessert,
+                                alt: "dessert.png",
+                                className: ""
+                            }} 
+                            text = "Dessert"
+                        />
+                    </Link>
+                    <Link to='/recipe'>
+                        <ListCard 
+                            img={{
+                                src: Lunch,
+                                alt: "lunch.png",
+                                className: ""
+                            }} 
+                            text = "Lunch"
+                        />
+                    </Link>
+                    <Link to='/recipe'>
+                        <ListCard 
+                            img={{
+                                src: Chocolate,
+                                alt: "",
+                                className: "chocolate.png"
+                            }} 
+                            text = "Chocolate"
+                        />
+                    </Link>
                 </div>
                 
             </div>
