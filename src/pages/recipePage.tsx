@@ -45,29 +45,29 @@ function RecipePage(){
         }
     }
 
-    const getMorningMeals = async() => {
+    const getMeals = async(tag: string) => {
         try{
             const results = await axiosInstance.get("recipes/random", {
                 params: {
-                    tags: "breakfast",
+                    tags: tag.toLowerCase(),
                     number: 9
                 }
             })
             const response = results.data.recipes
             setRecipeData(response)
         }catch(err){
-            console.error("Error fetching breakfast recipes:", err);
+            console.error(`Error fetching ${tag} recipes:`, err);
         }
     }
 
     useEffect ( ()=> {
-        getMorningMeals();
+        getMeals("Breakfast");
     }, [])
 
 
     return(
         <div className="h-screen">
-            <NavBar 
+            <NavBar  
                 Logo={Logo}
                 Facebook={Facebook}
                 Twitter={Twitter}
@@ -88,7 +88,7 @@ function RecipePage(){
                     <p className="text-center text-gray-500">No recipes found. Try searching for something else!</p>
                 )}
                 {searchData && searchData.length > 0 && (
-                    <div className="grid grid-cols-1 overscroll-x-auto md:grid-cols-3 gap-6 mt-4">
+                    <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
                         {searchData.map((recipe) => (
                             <div key={recipe.id} >
                                 <Card
@@ -98,8 +98,8 @@ function RecipePage(){
                                         className: ''
                                     }}
                                     title = {recipe?.title}
-                                    time = "10"
-                                    food = "food"
+                                    time = {recipe?.readyInMinutes}
+                                    food = {recipe?.dishTypes[0]}
                                 />
                             </div>
                         ))}
@@ -116,7 +116,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Breakfast"
-                        onClick={getMorningMeals}
+                        onClick={() => getMeals("Breakfast")}
                     />
                     <ListCard 
                         img={{
@@ -125,7 +125,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Vegan"
-                        onClick={getMorningMeals}
+                        onClick={() => getMeals("Vegan")}
                     />
                     <ListCard 
                         img={{
@@ -134,7 +134,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Meat"
-                        onClick={getMorningMeals}
+                        onClick={() => getMeals("Meat")}
                     />
                     <ListCard 
                         img={{
@@ -143,7 +143,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Dessert"
-                        onClick={getMorningMeals}
+                        onClick={() => getMeals("Dessert")}
                     />
                     <ListCard 
                         img={{
@@ -152,7 +152,7 @@ function RecipePage(){
                             className: ""
                         }} 
                         text = "Lunch"
-                        onClick={getMorningMeals}
+                        onClick={() => getMeals("Lunch")}
                     />
                     <ListCard 
                         img={{
@@ -161,8 +161,38 @@ function RecipePage(){
                             className: "chocolate.png"
                         }} 
                         text = "Chocolate"
-                        onClick={getMorningMeals}
+                        onClick={() => getMeals("Chocolate")}
                     />
+                </div>
+
+                <div className="mt-6 ">
+                    {loading && (
+                        <div className="flex justify-center items-center">
+                            <img src={Loading} alt="loading.svg" className="animate-spin " />
+                        </div>
+                        
+                    )}
+                    {!loading && recipeData.length === 0 && (
+                        <p className="text-center text-gray-500">No recipes found. Try searching for something else!</p>
+                    )}
+                    {recipeData && recipeData.length > 0 && (
+                        <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
+                            {recipeData.map((recipe) => (
+                                <div key={recipe.id} >
+                                    <Card
+                                        img={{
+                                            src: recipe?.image, 
+                                            alt:"", 
+                                            className: ''
+                                        }}
+                                        title = {recipe?.title}
+                                        time = {recipe?.readyInMinutes}
+                                        food = {recipe?.dishTypes[0]}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 
