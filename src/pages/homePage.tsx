@@ -24,49 +24,25 @@ import Rocola from "../assets/images/rucola-png.png"
 import PhotoPlate from "../assets/images/Photo-plate.png"
 import Salad from "../assets/images/kisspng-salad-salad-fresh-food-healthylife-vegetables-vegetarian-5d42e3a7cb8543 1.png"
 import { Link } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
+import { RecipeService } from "@/services/recipe-services"
 
 
 
 
 
 function HomePage() {
-    const [random, setRandom] = useState<Random | null>(null)
-    const [cards, SetCards ] = useState<Random[] >([])
+    const {data, isLoading, isError} = useQuery({
+        queryKey: ["random-recipe"],
+        queryFn: RecipeService.getRandomRecipe,
+    })
 
-    const getRandomRecipe = async () => {
-        try{
-            const response = await axiosInstance.get('recipes/random')
-            const results = response.data.recipes[0];
-            setRandom(results)
-            /* console.log(results) */
-        }catch(error: any) {
-            if (error.code === 'ECONNABORTED') {
-              console.error('Request timed out - please try again');
-            }
-            throw error;
-        }
-        
-    }
+    const { data: randomNine} = useQuery<Random[]>({
+        queryKey: ["random-nine-recipe"],
+        queryFn: RecipeService.getNineRandomRecipe,
+    });
 
-    const getNineRandomRecipe = async () => {
-        try{
-            const response = await axiosInstance.get('recipes/random?number=9')
-            const results = response.data.recipes;
-            SetCards(results)
-            /* console.log(results) */
-        }catch(error: any) {
-            if (error.code === 'ECONNABORTED') {
-              console.error('Request timed out - please try again');
-            }
-            throw error;
-        }
-        
-    }
 
-    useEffect(() => {
-        getRandomRecipe();
-        getNineRandomRecipe();
-    }, [])
 
 
     return(
@@ -84,22 +60,22 @@ function HomePage() {
                         <img src={img} alt="" className="w-3 h-3"/>
                         <h2 className="text-[16px] ">Hot Recipes</h2>
                     </div>
-                    <h1 className="font-bold mdtext-xl text-lg max-w-2xl">{random?.title}</h1>
-                    <p dangerouslySetInnerHTML={{ __html: random?.summary || "" }} className="text-sm line-clamp-4"/>
+                    <h1 className="font-bold mdtext-xl text-lg max-w-2xl">{data?.title}</h1>
+                    <p dangerouslySetInnerHTML={{ __html: data?.summary || "" }} className="text-sm line-clamp-4"/>
                     <div className="flex md:gap-6 gap-2 mt-2">
                         <div className="flex items-center bg-[#00000099] w-fit rounded-lg md:px-2 px-1">
                             <img src={Timer} alt="" className="w-3 h-3"/>
-                            <p className="md:text-sm text-[12px] whitespace-nowrap">{random?.readyInMinutes } mins</p>
+                            <p className="md:text-sm text-[12px] whitespace-nowrap">{data?.readyInMinutes } mins</p>
                         </div>
                         <div className="flex items-center bg-[#00000099] w-fit rounded-lg md:px-2 px-1 ">
                             <img src={Forknife} alt="" className="w-3 h-3"/>
-                            <p className="md:text-sm text-[12px] whitespace-nowrap">{random?.dishTypes[0] }</p>
+                            <p className="md:text-sm text-[12px] whitespace-nowrap">{data?.dishTypes[0] }</p>
                         </div>
                     </div>                    
                 </div>
                 <div className="w-[50%] relative ">
                     <img src={randomBg} alt="" className="w-full h-full rounded-2xl rounded-l" />
-                    <img src={random?.image || "https://img.spoonacular.com/recipes/639779-556x370.jpg"} alt="" className="absolute inset-0 md:m-14 md:w-64 md:h-64 h-24 w-24 m-6 rounded-full border border-gray-900 " />
+                    <img src={data?.image || "https://img.spoonacular.com/recipes/639779-556x370.jpg"} alt="" className="absolute inset-0 md:m-14 md:w-64 md:h-64 h-24 w-24 m-6 rounded-full border border-gray-900 " />
                 </div>
             </div>
 
@@ -178,17 +154,17 @@ function HomePage() {
                     <p className="text-center"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 md:w-84 md:h-84">
-                    {cards!.map((cards: Random) => (
+                    {randomNine?.map((randomNine: Random) => (
                         <Card 
-                            key={cards?.id}
+                            key={randomNine?.id}
                             img={{
-                                src: cards?.image, 
+                                src: randomNine?.image, 
                                 alt:"", 
                                 className: ''
                             }}
-                            title = {cards?.title}
-                            time = {cards?.readyInMinutes}
-                            food = {cards?.dishTypes[0]}
+                            title = {randomNine?.title}
+                            time = {randomNine?.readyInMinutes}
+                            food = {randomNine?.dishTypes[0]}
                         />
                     ))}
                 </div>
