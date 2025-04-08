@@ -1,17 +1,8 @@
-import { Routes, Route } from "react-router-dom"
-import HomePage from "./pages/homePage"
-import ContactPage from "./pages/contactPage"
-import RecipePage from "./pages/recipePage"
+import { RouterProvider } from "react-router-dom";
+import { router } from "./route/routes";
 
 function App() {
-
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage/>}></Route>
-      <Route path="/contact" element={<ContactPage/>}></Route>
-      <Route path="/recipe" element={<RecipePage/>}></Route>
-    </Routes>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
