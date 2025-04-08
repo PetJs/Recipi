@@ -1,10 +1,3 @@
-import { useEffect, useState } from "react"
-import axiosInstance from "@/api/axios"
-import Logo from "../assets/svgs/Cooking Template 🟣 by Flowbase.co (Community).svg"
-import Insta from "../assets/svgs/004-instagram.svg"
-import Facebook from "../assets/svgs/001-facebook.svg"
-import Twitter from "../assets/svgs/003-twitter.svg"
-import NavBar from "@/components/layouts/navbar"
 import randomBg from "../assets/images/foofBg.jpg"
 import img from "../assets/images/image 14.png"
 import Timer from "../assets/svgs/Timer.svg"
@@ -47,12 +40,6 @@ function HomePage() {
 
     return(
         <div className="h-screen">
-            <NavBar 
-                Logo={Logo}
-                Facebook={Facebook}
-                Twitter={Twitter}
-                Insta={Insta}
-            />
             {/* HERO SECTION */}
             <div className="relative flex m-4 justify-between md:h-96 ">
                 <div className="w-[50%] bg-[#E7FAFE] rounded-2xl rounded-r p-2">

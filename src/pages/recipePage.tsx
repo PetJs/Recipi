@@ -1,9 +1,4 @@
 import {useState } from "react"
-import Logo from "../assets/svgs/Cooking Template 🟣 by Flowbase.co (Community).svg"
-import Insta from "../assets/svgs/004-instagram.svg"
-import Facebook from "../assets/svgs/001-facebook.svg"
-import Twitter from "../assets/svgs/003-twitter.svg"
-import NavBar from "@/components/layouts/navbar"
 import Loading from "../assets/svgs/loading.svg"
 import Card from "@/components/common/card"
 import Vegan from "../assets/images/vegan.png"
@@ -47,12 +42,6 @@ function RecipePage(){
 
     return(
         <div className="h-screen">
-            <NavBar  
-                Logo={Logo}
-                Facebook={Facebook}
-                Twitter={Twitter}
-                Insta={Insta}
-            />
             <div className="relative m-4 ">
                 <h2 className="">Let's find the right recipe to create your memorable dish</h2>
                 <div className="relative">
