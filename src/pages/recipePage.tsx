@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import axiosInstance from "@/api/axios"
+import {useState } from "react"
 import Logo from "../assets/svgs/Cooking Template 🟣 by Flowbase.co (Community).svg"
 import Insta from "../assets/svgs/004-instagram.svg"
 import Facebook from "../assets/svgs/001-facebook.svg"
@@ -13,56 +12,37 @@ import Meat from "../assets/images/meat.png"
 import Dessert from "../assets/images/desert.png"
 import Lunch from "../assets/images/Lunch.png"
 import Chocolate from "../assets/images/chocolate.png"
-import { Random } from "@/types"
 import ListCard from "@/components/common/listCard"
+import { RecipeService } from "@/services/recipe-services"
+import { useQuery } from "@tanstack/react-query"
 
 function RecipePage(){
-    const [searchData, setSearchData] = useState<Random[] >([])
-    const [loading, setLoading] = useState(false);
-    const [recipeData, setRecipeData] = useState<Random[]>([])
+    const [searchQuery, setSearchQuery] = useState("");
+    // Create a function to handle category selection
+    const [selectedCategory, setSelectedCategory] = useState("Breakfast");
 
-    const Search = async(e: React.ChangeEvent<HTMLInputElement>) => {
-        const query = e.target.value
-        if(!query){
-            setSearchData([])
-            return ;   
-        }
-        setLoading(true);
+    const { data: searchData, isLoading: searchLoading } = useQuery({
+        queryKey: ["search-recipes", searchQuery],
+        queryFn: () => RecipeService.searchRecipes(searchQuery),
+        enabled: searchQuery.length > 0,
+    });
 
-        try{
-            const response = await axiosInstance.get('recipes/complexSearch', {
-                params: {
-                    query,
-                    number: 3
-                }
-            });
-            const results = response.data.results;
-            setSearchData(results);
-        }catch(err){
-            console.log(err)
-        }finally {
-            setLoading(false); // Stop loading
-        }
-    }
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
 
-    const getMeals = async(tag: string) => {
-        try{
-            const results = await axiosInstance.get("recipes/random", {
-                params: {
-                    tags: tag.toLowerCase(),
-                    number: 9
-                }
-            })
-            const response = results.data.recipes
-            setRecipeData(response)
-        }catch(err){
-            console.error(`Error fetching ${tag} recipes:`, err);
-        }
-    }
+    const { data: categoryData, isLoading: categoryLoading } = useQuery({
+        queryKey: ["get-meals", selectedCategory],
+        queryFn: () => RecipeService.getMeals(selectedCategory),
+        enabled: !!selectedCategory
+    });
 
-    useEffect ( ()=> {
-        getMeals("Breakfast");
-    }, [])
+
+    // Update the getMeals function for the onClick handlers
+    const getMeals = (category: string) => {
+        setSelectedCategory(category);
+    };
+
 
 
     return(
@@ -76,15 +56,15 @@ function RecipePage(){
             <div className="relative m-4 ">
                 <h2 className="">Let's find the right recipe to create your memorable dish</h2>
                 <div className="relative">
-                    <input type="text"placeholder="Type your recipe" onChange={Search} className=" bg-gray-800 justify-center w-full md:w-[50%] m-2 p-2 rounded-3xl text-white"  />
+                    <input type="text"placeholder="Type your recipe" onChange={handleSearch} className=" bg-gray-800 justify-center w-full md:w-[50%] m-2 p-2 rounded-3xl text-white"  />
                 </div> 
-                {loading && (
+                {searchLoading && (
                     <div className="flex justify-center items-center">
                         <img src={Loading} alt="loading.svg" className="animate-spin " />
                     </div>
                     
                 )}
-                {!loading && searchData.length === 0 && (
+                {!searchLoading && (!searchData || searchData.length === 0) && searchQuery && (
                     <p className="text-center text-gray-500">No recipes found. Try searching for something else!</p>
                 )}
                 {searchData && searchData.length > 0 && (
@@ -99,7 +79,7 @@ function RecipePage(){
                                     }}
                                     title = {recipe?.title}
                                     time = {recipe?.readyInMinutes}
-                                    food = {recipe?.dishTypes[0]}
+                                    food = {recipe?.dishTypes?.[0] || "N/A"}
                                 />
                             </div>
                         ))}
@@ -166,18 +146,18 @@ function RecipePage(){
                 </div>
 
                 <div className="mt-6 ">
-                    {loading && (
+                    {categoryLoading && (
                         <div className="flex justify-center items-center">
                             <img src={Loading} alt="loading.svg" className="animate-spin " />
                         </div>
                         
                     )}
-                    {!loading && recipeData.length === 0 && (
+                    {!categoryLoading && (!categoryData || categoryData.length === 0) && (
                         <p className="text-center text-gray-500">No recipes found. Try searching for something else!</p>
                     )}
-                    {recipeData && recipeData.length > 0 && (
+                    {categoryData && categoryData.length > 0 && (
                         <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
-                            {recipeData.map((recipe) => (
+                            {categoryData.map((recipe) => (
                                 <div key={recipe.id} >
                                     <Card
                                         img={{
@@ -187,7 +167,7 @@ function RecipePage(){
                                         }}
                                         title = {recipe?.title}
                                         time = {recipe?.readyInMinutes}
-                                        food = {recipe?.dishTypes[0]}
+                                        food = {recipe?.dishTypes?.[0] || "N/A"}
                                     />
                                 </div>
                             ))}
