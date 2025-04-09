@@ -10,6 +10,9 @@ import Chocolate from "../assets/images/chocolate.png"
 import ListCard from "@/components/common/listCard"
 import { RecipeService } from "@/services/recipe-services"
 import { useQuery } from "@tanstack/react-query"
+import { useUserStore } from "@/store/userStore";
+
+const setSelectedRecipeId = useUserStore((state) => state.setSelectedRecipeId);
 
 function RecipePage(){
     const [searchQuery, setSearchQuery] = useState("");
@@ -59,7 +62,7 @@ function RecipePage(){
                 {searchData && searchData.length > 0 && (
                     <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
                         {searchData.map((recipe) => (
-                            <div key={recipe.id} >
+                            <div key={recipe.id} onClick={() => setSelectedRecipeId(recipe.id)} >
                                 <Card
                                     img={{
                                         src: recipe?.image, 
@@ -147,7 +150,7 @@ function RecipePage(){
                     {categoryData && categoryData.length > 0 && (
                         <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
                             {categoryData.map((recipe) => (
-                                <div key={recipe.id} >
+                                <div key={recipe.id} onClick={() => setSelectedRecipeId(recipe.id)} >
                                     <Card
                                         img={{
                                             src: recipe?.image, 
