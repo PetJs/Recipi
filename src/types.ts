@@ -40,3 +40,28 @@ export interface ButtonProps{
     text: string;
     className: string;
 }
+
+export interface Ingredient {
+    name: string;
+}
+  
+export interface Step {
+    number: number;
+    step: string;
+}
+  
+export interface Instruction {
+    steps: Step[];
+}
+  
+export interface Recipe {
+    id: number;
+    title: string;
+    image: string;
+    readyInMinutes: number;
+    dishTypes: string[];
+    extendedIngredients: Ingredient[]; 
+    summary: string;
+    analyzedInstructions: Instruction[]; 
+}
+  

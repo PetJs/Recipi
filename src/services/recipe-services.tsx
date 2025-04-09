@@ -1,5 +1,5 @@
 import axiosInstance from "@/api/axios";
-import { Random } from "@/types";
+import { Random, Recipe } from "@/types";
 
 
 export class RecipeService{
@@ -58,6 +58,20 @@ export class RecipeService{
         } catch(err) {
             console.error(`Error searching recipes:`, err);
             return []; // Return empty array on error
+        }
+    }
+
+    static async getRecipeDetails(id: number): Promise<Recipe[]>{
+        try{
+            if(!id){
+                return [];
+            }
+
+            const response = await axiosInstance.get(`recipes/${id}/information`)
+            return response.data.results;
+        }catch(err){
+            console.error("Recipe Not Found"), err;
+            throw err
         }
     }
 }

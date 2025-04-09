@@ -11,8 +11,7 @@ import ListCard from "@/components/common/listCard"
 import { RecipeService } from "@/services/recipe-services"
 import { useQuery } from "@tanstack/react-query"
 import { useUserStore } from "@/store/userStore";
-
-const setSelectedRecipeId = useUserStore((state) => state.setSelectedRecipeId);
+import { Link } from "react-router-dom"
 
 function RecipePage(){
     const [searchQuery, setSearchQuery] = useState("");
@@ -40,6 +39,9 @@ function RecipePage(){
     const getMeals = (category: string) => {
         setSelectedCategory(category);
     };
+
+    const setSelectedRecipeId = useUserStore((state) => state.setSelectedRecipeId);
+
 
 
 
@@ -150,18 +152,20 @@ function RecipePage(){
                     {categoryData && categoryData.length > 0 && (
                         <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
                             {categoryData.map((recipe) => (
-                                <div key={recipe.id} onClick={() => setSelectedRecipeId(recipe.id)} >
-                                    <Card
-                                        img={{
-                                            src: recipe?.image, 
-                                            alt:"", 
-                                            className: ''
-                                        }}
-                                        title = {recipe?.title}
-                                        time = {recipe?.readyInMinutes}
-                                        food = {recipe?.dishTypes?.[0] || "N/A"}
-                                    />
-                                </div>
+                                <Link to={`/recipe/${recipe.id}`} >
+                                    <div key={recipe.id} onClick={() => setSelectedRecipeId(recipe.id)} >
+                                        <Card
+                                            img={{
+                                                src: recipe?.image, 
+                                                alt:"", 
+                                                className: ''
+                                            }}
+                                            title = {recipe?.title}
+                                            time = {recipe?.readyInMinutes}
+                                            food = {recipe?.dishTypes?.[0] || "N/A"}
+                                        />
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     )}
