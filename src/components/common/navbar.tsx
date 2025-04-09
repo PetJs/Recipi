@@ -37,7 +37,7 @@ const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
 
             {/* Mobile Menu - shown when menu is open */}
             {isOpen && (
-                <div className="absolute top-full right-0 w-full md:hidden bg-red-500 text-center">
+                <div className="z-20 absolute top-full right-0 w-full md:hidden bg-white text-center">
                     <ul className="flex flex-col gap-2 p-1 text-lg text-black underline">
                     <li>
                         <Link to='/'>Home</Link>

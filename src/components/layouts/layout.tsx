@@ -10,16 +10,14 @@ import Twitter from "../../assets/svgs/003-twitter.svg"
 export default function Layout() {
 
     return (
-        <div>
+        <>
             <NavBar  
                 Logo={Logo}
                 Facebook={Facebook}
                 Twitter={Twitter}
                 Insta={Insta}
             />
-
             <Outlet/>
-
-        </div>
+        </>
     )
 }

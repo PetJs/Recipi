@@ -41,7 +41,7 @@ function HomePage() {
     return(
         <div className="h-screen">
             {/* HERO SECTION */}
-            <div className="relative flex m-4 justify-between md:h-96 ">
+            <div className="flex m-4 justify-between md:h-96 ">
                 <div className="w-[50%] bg-[#E7FAFE] rounded-2xl rounded-r p-2">
                     <div className="flex rounded-lg bg-[#FFFFFF] w-fit items-center ">
                         <img src={img} alt="" className="w-3 h-3"/>
@@ -60,7 +60,7 @@ function HomePage() {
                         </div>
                     </div>                    
                 </div>
-                <div className="w-[50%] relative ">
+                <div className="w-[50%] relative">
                     <img src={randomBg} alt="" className="w-full h-full rounded-2xl rounded-l" />
                     <img src={data?.image || "https://img.spoonacular.com/recipes/639779-556x370.jpg"} alt="" className="absolute inset-0 md:m-14 md:w-64 md:h-64 h-24 w-24 m-6 rounded-full border border-gray-900 " />
                 </div>
