@@ -65,16 +65,18 @@ function RecipePage(){
                     <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
                         {searchData.map((recipe) => (
                             <div key={recipe.id} onClick={() => setSelectedRecipeId(recipe.id)} >
-                                <Card
-                                    img={{
-                                        src: recipe?.image, 
-                                        alt:"", 
-                                        className: ''
-                                    }}
-                                    title = {recipe?.title}
-                                    time = {recipe?.readyInMinutes}
-                                    food = {recipe?.dishTypes?.[0] || "N/A"}
-                                />
+                                <Link to={`/recipe/${recipe.id}`}>
+                                    <Card
+                                        img={{
+                                            src: recipe?.image, 
+                                            alt:"", 
+                                            className: ''
+                                        }}
+                                        title = {recipe?.title}
+                                        time = {recipe?.readyInMinutes}
+                                        food = {recipe?.dishTypes?.[0] || "N/A"}
+                                    />
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -152,8 +154,8 @@ function RecipePage(){
                     {categoryData && categoryData.length > 0 && (
                         <div className="grid overscroll-x-auto grid-cols-3 gap-6 mt-4">
                             {categoryData.map((recipe) => (
-                                <Link to={`/recipe/${recipe.id}`} >
-                                    <div key={recipe.id} onClick={() => setSelectedRecipeId(recipe.id)} >
+                                <Link to={`/recipe/${recipe.id}`} key={recipe.id} >
+                                    <div onClick={() => setSelectedRecipeId(recipe.id)} >
                                         <Card
                                             img={{
                                                 src: recipe?.image, 

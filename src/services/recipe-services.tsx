@@ -61,19 +61,18 @@ export class RecipeService{
         }
     }
 
-    static async getRecipeDetails(id: number): Promise<Recipe[]>{
-        try{
-            if(!id){
-                return [];
-            }
-
-            const response = await axiosInstance.get(`recipes/${id}/information`)
-            return response.data.results;
-        }catch(err){
-            console.error("Recipe Not Found"), err;
-            throw err
+    static async getRecipeDetails(id: number): Promise<Recipe> {
+        try {
+          const response = await axiosInstance.get(`recipes/${id}/information`);
+          const results = response.data; // fallback to empty array
+          console.log(results)
+          return results;
+        } catch (err) {
+          console.error("Recipe Not Found", err);
+          throw err;
         }
-    }
+      }
+      
 }
 
 
