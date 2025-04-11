@@ -64,4 +64,16 @@ export interface Recipe {
     summary: string;
     analyzedInstructions: Instruction[]; 
 }
+
+
+export interface Nutrient{
+    name: string;
+    amount: number;
+    unit: string;
+    percentOfDailyNeeds: number;
+}
+
+export interface NutirionInfo{
+    nutrients: Nutrient[];
+}
   

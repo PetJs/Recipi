@@ -147,7 +147,7 @@ function HomePage() {
             <div className="flex justify-center flex-col items-center">
               <h2 className="text-xl">Simple and tasty recipes</h2>
               <p className="text-center">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Check out Recipes to spicy up your catalogue in food and kitchen styles.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 md:w-84 md:h-84">
@@ -172,7 +172,7 @@ function HomePage() {
             <div className="w-1/2 flex flex-col justify-center items-center">
               <div className="mb-8">
                 <h2 className="text-xl font-bold">Everyone can be a chef in their own kitchen</h2>
-                <p className="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
+                <p className="text-sm">Do not stop at one, check out the various Reipe meu the world has to offer. Do not let barrier be a boundary </p>
               </div>
               <Button text="Learn More" className="" />
             </div>
@@ -194,7 +194,7 @@ function HomePage() {
             </div>
             <h1 className="text-xl font-semibold">Deliciousness to your Inbox</h1>
             <p className="md:w-[50%] w-[75%] line-clamp-3">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius rerum asperiores quos molestiae suscipit culpa na
+                If you want to reach out to add your own Recipe. We are just a click Away.
             </p>
 
             <div className="relative p-1 flex items-center justify-center">
