@@ -18,6 +18,12 @@ export default function Recipe() {
     enabled: !!selectedRecipeId,
   });
 
+  const { data: nutrient } = useQuery({
+    queryKey: ["recipe-nutrient", selectedRecipeId],
+    queryFn: () => RecipeService.getFoodNutrients(selectedRecipeId ?? 0),
+    enabled: !!selectedRecipeId,
+  });
+
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No recipe found.</p>;
 
@@ -54,19 +60,34 @@ export default function Recipe() {
       </div>
 
       <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 rounded-xl">
                 <img
                 src={data.image}
                 alt={data.title}
-                className="w-full h-auto rounded-lg shadow"
+                className="w-full h-auto rounded-xl shadow"
                 />
             </div>
-
-        
-            <div className="w-full md:w-1/2 mt-4 md:mt-0 md:ml-4 rounded-lg bg-gradient-to-t from-[#87CEEB] to-[#87CEEB]/10">
-                <h2 className="text-lg font-bold">DESCRIPTION</h2>
-                <p dangerouslySetInnerHTML={{ __html: data?.summary || "" }}></p>
+            <div className="w-full md:w-1/2 mt-4 md:mt-0 md:ml-4 p-4 rounded-lg bg-gradient-to-t from-[#87CEEB] to-[#87CEEB]/10">
+                <h2 className="text-2xl font-bold">Nutrition Information</h2>
+                <div className="flex justify-between text-lg font-semibold">
+                    <p>Name</p>
+                    <p>Amount</p>
+                    <p>Daily Percentage</p>
+                </div>
+                {nutrient?.nutrients.map((nutrients, i) => (
+                    <div key={i} className="flex justify-between text-center">
+                        <p>{nutrients.name}</p>
+                        <p className="">{nutrients.amount} {nutrients.unit}</p>
+                        <p>{nutrients.percentOfDailyNeeds}%</p>
+                    </div>
+                ))}
             </div>
+        </div>
+
+        {/* SUMMARY */}
+        <div className="w-full mt-4 rounded-lg bg-gradient-to-t from-[#87CEEB] to-[#87CEEB]/10">
+            <h2 className="text-lg font-bold">DESCRIPTION</h2>
+            <p dangerouslySetInnerHTML={{ __html: data?.summary || "" }}></p>
         </div>
 
         {/* Ingredients */}
@@ -100,7 +121,7 @@ export default function Recipe() {
                     <img src={PhotoPlate} alt="" />
                 </div>
             <h1 className="text-xl font-semibold">Deliciousness to your Inbox</h1>
-            <p className="md:w-[50%] w-[75%] line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius rerum asperiores quos molestiae suscipit culpa na</p>
+            <p className="md:w-[50%] w-[75%] line-clamp-3">If you want to reach out to add your own Recipe. We are just a click Away.</p>
 
             <div className="relative p-1 flex items-center justify-center">
                 <div className="">

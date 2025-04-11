@@ -1,5 +1,5 @@
 import axiosInstance from "@/api/axios";
-import { Random, Recipe } from "@/types";
+import { NutirionInfo, Random, Recipe } from "@/types";
 
 
 export class RecipeService{
@@ -64,14 +64,26 @@ export class RecipeService{
     static async getRecipeDetails(id: number): Promise<Recipe> {
         try {
           const response = await axiosInstance.get(`recipes/${id}/information`);
-          const results = response.data; // fallback to empty array
+          const results = response.data; 
           console.log(results)
           return results;
         } catch (err) {
           console.error("Recipe Not Found", err);
           throw err;
         }
-      }
+    }
+
+    static async getFoodNutrients(id: number): Promise<NutirionInfo>{
+        try{
+            const response = await axiosInstance.get(`recipes/${id}/nutritionWidget.json`);
+            const result = response.data;
+            console.log(result);
+            return result;
+        }catch(err){
+            console.error("Nutrients Not found", err);
+            throw err;
+        }
+    }
       
 }
 
