@@ -10,11 +10,11 @@ const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
     return(
         <nav className="relative flex items-center justify-between gap-2 p-1">
             <div>
-                <img src={Logo} alt="logo" className="md:w-28 w-24" />
+                <img src={Logo} alt="logo" className="md:w-18 w-12 ml-2" />
             </div>
             
             {/* Desktop Navigation - hidden on mobile */}
-            <ul className="hidden md:flex md:gap-4 gap-2 text-lg">
+            <ul className="hidden md:flex md:gap-12 gap-2 text-lg md:font-semibold">
                 <li>
                     <Link to='/'>Home</Link>
                 </li>
