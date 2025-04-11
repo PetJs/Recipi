@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# 🥗 Recipi - A Modern Recipe Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Demo 🚀](https://recipi-puce.vercel.app/)
 
-Currently, two official plugins are available:
+Recipi is a visually appealing and user-friendly recipe web application built with **React**, **TypeScript**, and **React Query**, powered by the **Spoonacular API**. Users can explore detailed recipes, including nutritional information, ingredients, and preparation steps — all wrapped in a sleek UI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔧 Tech Stack
 
-## Expanding the ESLint configuration
+- **React** (with TypeScript) — frontend framework
+- **React Query** — data fetching, caching, and state synchronization
+- **Zustand** — state management for shared state (e.g., selected recipe)
+- **Tailwind CSS** — utility-first CSS framework for styling
+- **Spoonacular API** — recipe and food data source
+- **Vite** — blazing fast frontend build tool
+- **Vercel** — deployment platform
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📦 Features
 
-- Configure the top-level `parserOptions` property like this:
+- 📋 Browse recipe details (title, summary, ingredients, instructions)
+- 🧑‍🍳 View nutrition facts like amount and daily percentage
+- ⏱ See prep time and dish type
+- 🖼 Rich images and SVG icons for aesthetics
+- 🔎 Dynamic routing and interaction using Zustand
+- ⚡ Optimized loading with React Query and `enabled` flags
+- 📬 Newsletter call-to-action section with image overlays
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🔌 API Reference
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+This project uses the [Spoonacular API](https://spoonacular.com/food-api) to fetch;
+> ⚠️ Make sure to configure your API key and handle request limits if extending the project.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 📥 Installation & Running Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/PetJs/recipi.git
+cd recipi
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+
+
