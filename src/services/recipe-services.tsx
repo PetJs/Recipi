@@ -1,5 +1,5 @@
 import axiosInstance from "@/api/axios";
-import { NutirionInfo, Random, Recipe } from "@/types";
+import { ApiResponse, AuthUser, NutirionInfo, Random, Recipe, User } from "@/types";
 
 
 export class RecipeService{
@@ -82,6 +82,18 @@ export class RecipeService{
         }catch(err){
             console.error("Nutrients Not found", err);
             throw err;
+        }
+    }
+
+    static async connect(
+        user: Omit<User, "spoonacularPassword">
+      ): Promise<ApiResponse<AuthUser>> {
+        try {
+          const response = await axiosInstance.post("/users/connect", user);
+          return response.data;
+        } catch (error) {
+          console.error("Error registering user:", error);
+          throw error;
         }
     }
       
