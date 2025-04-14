@@ -76,4 +76,24 @@ export interface Nutrient{
 export interface NutirionInfo{
     nutrients: Nutrient[];
 }
+
+export type User = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    username: string;
+    spoonacularPassword: string;
+};
+
+export type AuthUser = {
+    user: User;
+    hash: string;
+};
+  
+export type ApiResponse<T> = {
+    status_code: number;
+    message: string;
+    data: T;
+};
+  
   
