@@ -3,6 +3,7 @@ import { NavBarProps } from "@/types";
 import Menu from "../../assets/svgs/menu-svgrepo-com.svg"
 import cancel from "../../assets/svgs/cancel-svgrepo-com.svg"
 import { Link } from "react-router-dom";
+import { User } from "lucide-react";
 
 
 const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
@@ -26,14 +27,23 @@ const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
                 </li>
             </ul>
 
-            {/* Mobile Menu Button - visible only on mobile */}
-            <button
-                className="md:hidden text-white"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
-            >
-                {isOpen ? <img src={cancel} alt="cancel svg" className="w-8 h-8"  /> : <img src={Menu} alt="menu" className="w-8 h-8" /> }
-            </button>
+            <div className="flex gap-2">
+                <Link to="/kitchen/favourite">
+                    <div className="bg-gray-300 rounded-full p-1">
+                        <User className="fill-gray-300"/>
+                    </div>
+                </Link>
+                
+                {/* Mobile Menu Button - visible only on mobile */}
+                <button
+                    className="md:hidden text-white"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {isOpen ? <img src={cancel} alt="cancel svg" className="w-8 h-8"  /> : <img src={Menu} alt="menu" className="w-8 h-8" /> }
+                </button>
+            </div>
+            
 
             {/* Mobile Menu - shown when menu is open */}
             {isOpen && (
@@ -57,13 +67,6 @@ const NavBar: React.FC<NavBarProps> = ({Logo, Facebook, Twitter, Insta}) => {
                 </div>
                 
             )}
-
-            {/* Social Media Icons */}
-            <div className="hidden md:flex md:gap-3 gap-2">
-                <img src={Facebook} alt="Facebook logo" />
-                <img src={Twitter} alt="Twitter Logo" />
-                <img src={Insta} alt="Insta Logo" />
-            </div>
         </nav>
 
     )
