@@ -3,6 +3,8 @@
 export default function MealPlanning(){
 
     return(
-        <div></div>
+        <div>
+            <h2>Hi</h2>
+        </div>
     )
 }
