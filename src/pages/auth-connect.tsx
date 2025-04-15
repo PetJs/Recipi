@@ -16,6 +16,7 @@ import { useUserStore } from "@/store/userStore";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { RecipeService } from "@/services/recipe-services";
+import { User } from "@/types";
 
 const signUpSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -31,10 +32,20 @@ export default function Connect() {
   const registerMutation = useMutation({
     mutationFn: RecipeService.connect,
     onSuccess: (resp) => {
-      setUser({ user: resp.data.user });
-      setHash(resp.data.hash, "");
+      console.log("Response from connect:", resp);
+      console.log("username:", resp.username)
+      const user: User = {
+        username: resp.username,  
+        spoonacularPassword: resp.spoonacularPassword, 
+      };
+    
+      // Update the user store
+      setUser({ user });
+    
+      // Store the hash value directly from the API response
+      setHash(resp.hash, "");
       toast.success("Woo hoo signed up");
-      navigate("/");
+      navigate("/kitchen/favourite");
     },
     onError: (err) => {
       console.log(err);
@@ -63,7 +74,7 @@ export default function Connect() {
   };
 
   return (
-    <div className="w-full max-w-[400px] bg-white rounded-2xl shadow-md p-6">
+    <div className="w-full max-w-[400px] bg-white mx-auto mt-6 rounded-2xl shadow-md p-6">
       <h1 className="text-[32px] font-semibold text-gray-700 text-center mb-6">
         Connect to access your Kitchen
       </h1>
