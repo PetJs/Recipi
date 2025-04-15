@@ -2,7 +2,9 @@ import { useFavoriteStore } from "@/store/favouriteStore";
 import Card from "@/components/common/card";
 
 export default function Favorites() {
+  console.log("✅ Favorites component mounted");
   const { favorites, removeFavorite, isFavorite } = useFavoriteStore();
+  console.log(favorites)
 
   return (
     <div className="px-4 py-8">
@@ -14,10 +16,14 @@ export default function Favorites() {
           {favorites.map((recipe) => (
             <Card
               key={recipe.id}
-              img={{ src: recipe.image, alt: recipe.title }}
+              img={{
+                src: recipe?.image || "", 
+                alt:"", 
+                className: ''
+            }}
               title={recipe.title}
               time={recipe.readyInMinutes}
-              food={recipe.dishTypes[0]}
+              food={recipe.dishTypes?.[0]}
               isFavorited={isFavorite(recipe.id)}
               onToggleFavorite={() => removeFavorite(recipe.id)}
             />
