@@ -24,7 +24,7 @@ const signUpSchema = z.object({
   lastName: z.string(),
 });
 
-export default function SignUp() {
+export default function Connect() {
   const navigate = useNavigate();
   const { setUser, setHash } = useUserStore();
 
@@ -64,8 +64,8 @@ export default function SignUp() {
 
   return (
     <div className="w-full max-w-[400px] bg-white rounded-2xl shadow-md p-6">
-      <h1 className="text-xl font-bold text-gray-700 text-center mb-6">
-        Thrift Management Signup
+      <h1 className="text-[32px] font-semibold text-gray-700 text-center mb-6">
+        Connect to access your Kitchen
       </h1>
 
       <Form {...form}>
@@ -140,10 +140,10 @@ export default function SignUp() {
 
           <Button
             type="submit"
-            className="w-full bg-[#2341AA] text-white py-2"
+            className="w-full bg-green-400 text-white py-2"
             disabled={registerMutation.isPending}
           >
-            {registerMutation.isPending ? "Signing up..." : "Sign Up"}
+            {registerMutation.isPending ? "Connecting..." : "Connect"}
           </Button>
         </form>
       </Form>
