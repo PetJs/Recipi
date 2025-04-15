@@ -34,6 +34,8 @@ export interface CardProps{
     title: string | any;
     time: number | any;
     food: string | any;
+    isFavorited?: boolean;
+    onToggleFavorite?: () => void;
 }
 
 export interface ButtonProps{
