@@ -1,5 +1,5 @@
 import axiosInstance from "@/api/axios";
-import { ApiResponse, AuthUser, NutirionInfo, Random, Recipe, User } from "@/types";
+import {  AuthUser, NutirionInfo, Random, Recipe, User } from "@/types";
 
 
 export class RecipeService{
@@ -87,10 +87,11 @@ export class RecipeService{
 
     static async connect(
         user: Omit<User, "spoonacularPassword">
-      ): Promise<ApiResponse<AuthUser>> {
+      ): Promise<AuthUser> {
         try {
           const response = await axiosInstance.post("/users/connect", user);
-          return response.data;
+          const result = response.data;
+          return result;
         } catch (error) {
           console.error("Error registering user:", error);
           throw error;
