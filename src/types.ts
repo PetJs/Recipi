@@ -80,22 +80,23 @@ export interface NutirionInfo{
 }
 
 export type User = {
-    firstName: string;
-    lastName: string;
-    email: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
     username: string;
     spoonacularPassword: string;
 };
 
 export type AuthUser = {
-    user: User;
+    username: string;
+    spoonacularPassword: string;
     hash: string;
 };
   
 export type ApiResponse<T> = {
-    status_code: number;
-    message: string;
+    status: string;
     data: T;
 };
+  
   
   
