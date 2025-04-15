@@ -12,11 +12,14 @@ import { RecipeService } from "@/services/recipe-services"
 import { useQuery } from "@tanstack/react-query"
 import { useUserStore } from "@/store/userStore";
 import { Link } from "react-router-dom"
+import { useFavoriteStore } from "@/store/favouriteStore"
 
 function RecipePage(){
     const [searchQuery, setSearchQuery] = useState("");
     // Create a function to handle category selection
     const [selectedCategory, setSelectedCategory] = useState("Breakfast");
+
+    const { addFavorite, removeFavorite, isFavorite } = useFavoriteStore();
 
     const { data: searchData, isLoading: searchLoading } = useQuery({
         queryKey: ["search-recipes", searchQuery],
@@ -40,10 +43,15 @@ function RecipePage(){
         setSelectedCategory(category);
     };
 
+    const handleFavoriteToggle = (recipe: any) => {
+        if (isFavorite(recipe.id)) {
+          removeFavorite(recipe.id);
+        } else {
+          addFavorite(recipe);
+        }
+    };
+
     const setSelectedRecipeId = useUserStore((state) => state.setSelectedRecipeId);
-
-
-
 
     return(
         <div className="h-screen">
@@ -75,6 +83,8 @@ function RecipePage(){
                                         title = {recipe?.title}
                                         time = {recipe?.readyInMinutes}
                                         food = {recipe?.dishTypes?.[0] || "N/A"}
+                                        onToggleFavorite={() => handleFavoriteToggle(recipe)}
+                                        isFavorited={isFavorite(recipe.id)}
                                     />
                                 </Link>
                             </div>
@@ -165,6 +175,8 @@ function RecipePage(){
                                             title = {recipe?.title}
                                             time = {recipe?.readyInMinutes}
                                             food = {recipe?.dishTypes?.[0] || "N/A"}
+                                            onToggleFavorite={() => handleFavoriteToggle(recipe)}
+                                            isFavorited={isFavorite(recipe.id)}
                                         />
                                     </div>
                                 </Link>
