@@ -13,6 +13,7 @@ export interface Random{
     readyInMinutes: number;
     title: string;
     dishTypes: string[];
+    imageType: string;
 }
 
 export interface ListCardProps{
@@ -27,13 +28,13 @@ export interface ListCardProps{
 
 export interface CardProps{
     img: {
-        src: string | any;
-        alt: string;
+        src?: string | any;
+        alt?: string;
         className?: string;
     };
-    title: string | any;
-    time: number | any;
-    food: string | any;
+    title?: string | any;
+    time?: number | any;
+    food?: string | any;
     isFavorited?: boolean;
     onToggleFavorite?: () => void;
 }
