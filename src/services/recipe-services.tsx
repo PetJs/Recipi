@@ -132,6 +132,37 @@ export class RecipeService{
             return []; // Return empty array on error
         }
     }
+
+    static async getShoppingList(username: string, hash: string): Promise<any>{
+        try{
+            const response = await axiosInstance.get(`mealplanner/${username}/shopping-list`, {
+                params:{
+                    hash,
+                }
+            });
+            const result = response.data.aisles;
+            console.log(result);
+            return result;
+        }catch(err){
+            console.error("Shopping Not found", err);
+            throw err;
+        }
+    }
+
+    static async addItem( username: string, hash: string, payload: { item: string; parse: boolean }): Promise<any> {
+        try {
+          const response = await axiosInstance.post(`mealplanner/${username}/shopping-list/items`,payload, {
+            params:{
+                hash,
+            }
+          });
+          const result = response.data;
+          return result;
+        } catch (error) {
+          console.error("Error Adding Item:", error);
+          throw error;
+        }
+    }
       
 }
 
