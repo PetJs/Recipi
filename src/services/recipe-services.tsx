@@ -97,6 +97,41 @@ export class RecipeService{
           throw error;
         }
     }
+
+    static async generateMealPlan(timeFrame: string, targetCalories: number, diet: string): Promise<Random[]> {
+        try {
+            if ((timeFrame || targetCalories || diet) === null ) return [];
+            
+            const response = await axiosInstance.get("mealplanner/generate", {
+                params: {
+                  timeFrame,
+                  targetCalories,
+                  diet,
+                },
+            });
+              
+            // For "day", the API returns { meals: [...], nutrients: {...} }
+            if (timeFrame.toLowerCase() === "day") {
+                return response.data.meals;
+            } 
+            // For "week", the API returns { week: { monday: { meals: [...], nutrients: {...} }, ... } }
+            else if (timeFrame.toLowerCase() === "week") {
+                // Flatten the meals from each day in the week
+                const weekPlan = response.data.week;
+                if (!weekPlan) return []; // Ensure weekPlan exists
+            
+                // Assuming each day has a "meals" property:
+                const weekMeals: Random[] = Object.values(weekPlan)
+                    .flatMap((day: any) => day.meals || []);
+                return weekMeals;
+            }
+            
+            return [];
+        } catch(err) {
+            console.error(`Error generating meals:`, err);
+            return []; // Return empty array on error
+        }
+    }
       
 }
 
