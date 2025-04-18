@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import Loading from "@/assets/svgs/loading.svg"
 
 type ShoppingListFormValues = {
   item: string;
@@ -65,14 +66,28 @@ export default function ShoppingList() {
 
   return (
     <div className="p-4">
-      {data && data.length === 0 ? (
-        <p>Nothing in Your List yet</p>
-      ) : (
-        <div>
-          {/* Render your shopping list items */}
+      {/* Render list or empty message */}
+      {!data ? (
+        <div className="flex justify-center items-center">
+          <img src={Loading} alt="loading.svg" className="animate-spin " />
         </div>
+      ) : data.length > 0 ? (
+        <div className="mb-4 space-y-4">
+          {data.map((group: any) => (
+            <div key={group.aisle}>
+              <h3 className="text-lg font-semibold">{group.aisle}</h3>
+              {group.items.map((item: any) => (
+                <div key={item.id} className="p-2 border-b flex justify-between">
+                  <p>{item.name.toUpperCase()}</p>
+                  <p>Cost: ${item.cost}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Nothing in your list yet.</p>
       )}
-
       <p className="mt-4 font-bold">Add to List</p>
       <Form {...form}> 
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-[400px] bg-white rounded-2xl shadow-md ">

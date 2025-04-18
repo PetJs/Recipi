@@ -141,7 +141,7 @@ export class RecipeService{
                 }
             });
             const result = response.data.aisles;
-            console.log(result);
+            console.log("Resp:", result);
             return result;
         }catch(err){
             console.error("Shopping Not found", err);

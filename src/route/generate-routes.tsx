@@ -58,9 +58,6 @@ const renderRoutes = (
 export const generateRoutes = (mainRoutes: LayoutConfig[]) => {
     const Routes = () => {
       const { user, accessHash } = useUserStore();
-      console.log(user?.username)
-      console.log(accessHash)
-  
       return (
         <ReactRoutes>
           {mainRoutes.map(({ layout: OuterLayout, children }, index) => (
