@@ -7,7 +7,7 @@ export default function KitchenLayout(){
 
     return(
         <div className="p-2">
-            <h2 className="text-xl font-bold">Welcome to your Kitchen {user?.username}</h2>
+            <h2 className="text-xl font-bold">Welcome to your Kitchen {user?.username.toLocaleUpperCase()}</h2>
             <nav className="flex gap-4 mt-4 md:text-lg text-[14px] font-semibold">
                 <NavLink to='/kitchen/favourite' className={({ isActive }) => 
                     isActive 
