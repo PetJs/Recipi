@@ -163,6 +163,22 @@ export class RecipeService{
           throw error;
         }
     }
+
+    static async deleteShoppingListItem(username: string, hash: string, id: number): Promise<any>{
+        try{
+            const response = await axiosInstance.delete(`mealplanner/${username}/shopping-list/items/${id}`, {
+                params:{
+                    hash,
+                }
+            });
+            const result = response.data;
+            console.log("Resp:", result);
+            return result;
+        }catch(err){
+            console.error("Shopping Not found", err);
+            throw err;
+        }
+    }
       
 }
 

@@ -51,6 +51,24 @@ export default function ShoppingList() {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) => 
+      RecipeService.deleteShoppingListItem(
+        user!.username, 
+        accessHash!, 
+        id
+      ),
+    onSuccess: () => {
+      toast.success("Item removed");
+      queryClient.invalidateQueries({
+        queryKey: ["shopping-list", user?.username, accessHash],
+      });
+    },
+    onError: () => {
+      toast.error("Error removing item");
+    },
+  });
+
 
   const form = useForm<ShoppingListFormValues>({
     defaultValues: {
@@ -77,9 +95,12 @@ export default function ShoppingList() {
             <div key={group.aisle}>
               <h3 className="text-lg font-semibold">{group.aisle}</h3>
               {group.items.map((item: any) => (
-                <div key={item.id} className="p-2 border-b flex justify-between">
-                  <p>{item.name.toUpperCase()}</p>
-                  <p>Cost: ${item.cost}</p>
+                <div key={item.id} className="p-2 border-b flex justify-between items-center">
+                  <div className="flex gap-4">
+                    <p>{item.name.toUpperCase()}</p>
+                    <p>Cost: ${item.cost}</p>
+                  </div>
+                  <Button onClick={() => deleteMutation.mutate(item.id)} className="bg-red-500 hover:text-white w-[6em]">Delete Item</Button>
                 </div>
               ))}
             </div>
@@ -88,9 +109,11 @@ export default function ShoppingList() {
       ) : (
         <p>Nothing in your list yet.</p>
       )}
+
+
       <p className="mt-4 font-bold">Add to List</p>
       <Form {...form}> 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-[400px] bg-white rounded-2xl shadow-md ">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-[400px] bg-white rounded-2xl shadow-md p-2 ">
             <div className="flex mb-4 gap-2">
                 <FormField
                     control={form.control}
@@ -133,7 +156,7 @@ export default function ShoppingList() {
           
           <Button
             type="submit"
-            className="mr-auto  bg-green-500 text-white py-2"
+            className="mr-auto  bg-green-500 text-white p-2 mb-4"
             disabled={addMutation.isPending}
           >
             {addMutation.isPending ? "Adding..." : "Add to Shopping List"}
