@@ -150,7 +150,7 @@ function HomePage() {
                 Check out Recipes to spicy up your catalogue in food and kitchen styles.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 md:w-84 md:h-84">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 place-items-center m-4 md:w-84 md:h-84">
               {randomNine?.map((randomNine: Random) => (
                 <Card
                   key={randomNine?.id}
