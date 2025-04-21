@@ -7,6 +7,7 @@ import Recipe from "@/pages/recipi";
 import Favorites from "@/pages/kitchen/bookmark";
 import MealPlanning from "@/pages/kitchen/mealPlanning";
 import ShoppingList from "@/pages/kitchen/shoppingList";
+import Chat from "@/pages/chatbot";
 import { generateRoutes } from "./generate-routes";
 
 
@@ -31,6 +32,10 @@ export const routeConfig = [
         element: ContactPage
       },
       {
+        path: "chat-bot",
+        element: Chat
+      },
+      {
         path: "kitchen",
         element: KitchenLayout,
         children: [
@@ -38,7 +43,7 @@ export const routeConfig = [
           { path: "meal-planning", element: MealPlanning },
           { path: "shopping-list", element: ShoppingList }
         ]
-      }
+      },
     ]
   }
   

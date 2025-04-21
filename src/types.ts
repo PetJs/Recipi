@@ -98,6 +98,11 @@ export type ApiResponse<T> = {
     status: string;
     data: T;
 };
+
+export interface ChatResponse {
+    answerText: string;
+    media: any[]; 
+}
   
   
   
