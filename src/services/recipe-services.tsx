@@ -1,5 +1,5 @@
 import axiosInstance from "@/api/axios";
-import {  AuthUser, NutirionInfo, Random, Recipe, User } from "@/types";
+import {  AuthUser, ChatResponse, NutirionInfo, Random, Recipe, User } from "@/types";
 
 
 export class RecipeService{
@@ -179,7 +179,22 @@ export class RecipeService{
             throw err;
         }
     }
-      
+    
+    static async chat(text: string): Promise<ChatResponse>{
+        try{
+            const response = await axiosInstance.get("food/converse", {
+                params: {
+                    text,
+                }
+            })
+            const result = response.data;
+            console.log("Resp: ", result)
+            return result;
+        }catch(error){
+            console.error("Error returning chat", error);
+            throw error;
+        }
+    }
 }
 
 
