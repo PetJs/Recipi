@@ -180,11 +180,12 @@ export class RecipeService{
         }
     }
     
-    static async chat(text: string): Promise<ChatResponse>{
+    static async chat(text: string, contextId: string): Promise<ChatResponse>{
         try{
             const response = await axiosInstance.get("food/converse", {
                 params: {
                     text,
+                    contextId,
                 }
             })
             const result = response.data;
